@@ -1,27 +1,30 @@
 {
-  "name": "monaca-template-minimum",
-  "version": "2.0.7",
-  "displayName": "Monaca Template Minimum",
-  "dependencies": {
-    "cordova-custom-config": "5.1.0",
-    "cordova-plugin-splashscreen": "5.0.2",
-    "cordova-plugin-whitelist": "1.3.3",
-    "monaca-plugin-monaca-core": "3.3.0"
-  },
+  "name": "puyo",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "monaca:preview": "npm run dev",
-    "dev": "browser-sync start -s www/ --watch --port 8080 --ui-port 8081"
+    "dev": "nuxt",
+    "build": "nuxt-ts build",
+    "start": "nuxt-ts start",
+    "export": "nuxt-ts export",
+    "serve": "nuxt-ts serve",
+    "lint:js": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lint": "npm run lint:js"
   },
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-whitelist": {},
-      "cordova-plugin-splashscreen": {},
-      "cordova-custom-config": {},
-      "monaca-plugin-monaca-core": {}
-    }
+  "dependencies": {
+    "@nuxt/typescript-runtime": "^0.4.10",
+    "nuxt": "^2.13.0"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.7",
-    "cordova": "^9.0.0"
+    "@nuxt/typescript-build": "^1.0.3",
+    "@nuxtjs/eslint-config": "^3.0.0",
+    "@nuxtjs/eslint-config-typescript": "^2.0.0",
+    "@nuxtjs/eslint-module": "^2.0.0",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-nuxt": "^1.0.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5"
   }
 }
