@@ -1,10 +1,6 @@
 <template>
   <div class="score" :style="styleObject">
-    <ul>
-      <li v-for="n in scoreArray" :key="n">
-        <ScoreNum :n="n" />
-      </li>
-    </ul>
+    <ScoreNum v-for="n in scoreArray" :key="n" :n="n" />
   </div>
 </template>
 
@@ -13,13 +9,6 @@
   margin: 0 auto;
   overflow: hidden;
   text-align: right;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline;
 }
 </style>
 

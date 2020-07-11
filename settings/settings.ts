@@ -10,8 +10,8 @@ export namespace AppSettings {
 
   // フィールドサイズ追加
   // 高さが全部入るように調整
-  export const puyoImgHeight = (window.innerHeight-fontHeight)/stageRows
-  export const puyoImgWidth = defaultPuyoImgHeight;
+  export const puyoImgHeight = (window.innerHeight - fontHeight) / stageRows
+  export const puyoImgWidth = puyoImgHeight;
 
   export const stageBackgroundColor = '#ffffff'; // ステージの背景色
   export const scoreBackgroundColor = '#24c0bb'; // スコアの背景色
