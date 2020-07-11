@@ -1,5 +1,5 @@
 <template>
-  <img clas="puyo" :src="puyoImage">
+  <img clas="puyo" :src="puyoImage" :width="imgWidth" :height="imgHeight">
 </template>
 
 <style scoped>
@@ -10,7 +10,20 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import {AppSettings} from '~/settings/settings';
+
+export type PuyoSizeType = {
+  height: number
+  width: number
+}
+
 export default Vue.extend({
+  data(): any {
+    return {
+      imgWidth: AppSettings.puyoImgWidth,
+      imgHeight: AppSettings.puyoImgHeight
+    }
+  },
   props: {
     puyoType: {
       type: Number,
@@ -20,7 +33,7 @@ export default Vue.extend({
   computed: {
     puyoImage(): String {
       return `/img/puyo_${this.puyoType}.png`;
-    }
+    },
   }
 })
 </script>
