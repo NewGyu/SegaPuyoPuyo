@@ -1,5 +1,7 @@
 <template>
   <div class="stage">
+    <Batankyu />
+    <Puyo puyo-type=3 />
   </div>
 </template>
 
