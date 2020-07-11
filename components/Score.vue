@@ -1,5 +1,5 @@
 <template>
-  <div class="score">
+  <div class="score" :style="styleObject">
     <ul>
       <li v-for="n in scoreArray" :key="n">
         <ScoreNum :n="n" />
@@ -25,7 +25,18 @@ li {
 
 <script lang="ts">
 import Vue from 'vue'
+import { AppSettings } from '../settings/settings'
 export default Vue.extend({
+  data(): any {
+    return {
+      styleObject: {
+        backgroundColor: AppSettings.scoreBackgroundColor,
+        top: AppSettings.puyoImgHeight * AppSettings.stageRows + 'px',
+        width: AppSettings.puyoImgWidth * AppSettings.stageCols + 'px',
+        height: AppSettings.fontHeight + 'px',
+      },
+    }
+  },
   props: {
     score: {
       type: Number,

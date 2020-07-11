@@ -1,5 +1,6 @@
 <template>
   <div class="stage" :style="styleObject">
+    <Zenkeshi />
     <Batankyu />
     <Puyo puyo-type="3" />
   </div>
