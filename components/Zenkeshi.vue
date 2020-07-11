@@ -1,22 +1,42 @@
 <template>
-  <img class="zenkeshi" src="/img/zenkeshi.png" />
+  <img class="zenkeshi" :class="classObject" src="/img/zenkeshi.png" :width="imageWidth" />
 </template>
 
 <style scoped>
 .zenkeshi {
   position: absolute;
 }
-
-.zenkeshi.hidden {
+.hidden {
   display: none;
+}
+.shown {
+  display: block;
 }
 </style>
 
 <script lang="ts">
 import Vue from 'vue'
+import { AppSettings } from '../settings/settings'
+
 export default Vue.extend({
   data(): any {
-    return {}
+    return {
+      imageWidth: AppSettings.puyoImgWidth * 6,
+    }
+  },
+  props: {
+    shown: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  computed: {
+    classObject(): any {
+      return {
+        hidden: !this.shown,
+        shown: this.shown,
+      }
+    },
   },
 })
 </script>
