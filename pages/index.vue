@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <Stage />
-    <Score />
+    <Score score=24390 />
   </div>
 </template>
 
