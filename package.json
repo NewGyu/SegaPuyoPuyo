@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@nuxt/typescript-runtime": "^0.4.10",
+    "emittery": "^0.7.1",
     "nuxt": "^2.13.0"
   },
   "devDependencies": {
