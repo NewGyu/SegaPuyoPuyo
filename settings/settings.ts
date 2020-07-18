@@ -13,8 +13,6 @@ export namespace AppSettings {
   export const puyoImgHeight = (window.innerHeight - fontHeight) / stageRows
   export const puyoImgWidth = puyoImgHeight;
 
-  export const scoreBackgroundColor = '#24c0bb'; // スコアの背景色
-
   export const freeFallingSpeed = 16; // 自由落下のスピード
   export const erasePuyoCount = 4; // 何個以上揃ったら消えるか
   export const eraseAnimationDuration = 30; // 何フレームでぷよを消すか

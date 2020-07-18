@@ -9,6 +9,7 @@
   margin: 0 auto;
   overflow: hidden;
   text-align: right;
+  background-color: #24c0bb;
 }
 </style>
 
@@ -19,7 +20,6 @@ export default Vue.extend({
   data(): any {
     return {
       styleObject: {
-        backgroundColor: AppSettings.scoreBackgroundColor,
         top: AppSettings.puyoImgHeight * AppSettings.stageRows + 'px',
         width: AppSettings.puyoImgWidth * AppSettings.stageCols + 'px',
         height: AppSettings.fontHeight + 'px',
