@@ -8,7 +8,10 @@ export namespace PuyoEvent {
   export type EmitFunc = (eventName: TriggerNames, eventData: AnyEvent) => Promise<void>;
 
   //落ちぷよが動かされた
-  export interface Moved { }
+  export interface Moved {
+    startX: number
+    destX: number
+  }
 
   //そろって消えた
   export interface Erased { }

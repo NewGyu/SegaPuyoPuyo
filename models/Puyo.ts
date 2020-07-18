@@ -24,7 +24,15 @@ export class FixedPuyo extends Puyo {
 
 //落ちぷよ
 export class FallingPuyo extends Puyo {
+  moveHorizontal(destX: number) {
+    console.log(this.eventEmit)
+    this.eventEmit("moved", {
+      startX: this.position.x,
+      destX
+    });
 
+    this.position.x = destX;
+  }
 }
 
 //ぷよの色
