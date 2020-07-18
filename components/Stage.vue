@@ -11,7 +11,9 @@
   position: relative;
   margin: 0 auto;
   overflow: hidden;
-  background: url(/img/puyo_1bg.png);
+  background-image: url(/img/puyo_1.png);
+  background-color: rgb(255, 255, 255, 0.5);
+  background-blend-mode: lighten;
 }
 </style>
 
@@ -24,7 +26,6 @@ export default Vue.extend({
       styleObject: {
         width: AppSettings.puyoImgWidth * AppSettings.stageCols + 'px',
         height: AppSettings.puyoImgHeight * AppSettings.stageRows + 'px',
-        backgroundColor: AppSettings.stageBackgroundColor,
       },
     }
   },

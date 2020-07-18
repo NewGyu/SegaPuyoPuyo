@@ -13,7 +13,6 @@ export namespace AppSettings {
   export const puyoImgHeight = (window.innerHeight - fontHeight) / stageRows
   export const puyoImgWidth = puyoImgHeight;
 
-  export const stageBackgroundColor = '#ffffff'; // ステージの背景色
   export const scoreBackgroundColor = '#24c0bb'; // スコアの背景色
 
   export const freeFallingSpeed = 16; // 自由落下のスピード
