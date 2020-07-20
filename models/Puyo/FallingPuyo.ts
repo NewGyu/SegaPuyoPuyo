@@ -22,9 +22,10 @@ export class FallingPuyoPuyo {
       position,
       eventEmit
     );
+
     this._movablePuyo = new FallingPuyo(
       this.determineColor(),
-      { x: position.x, y: position.y - 1 },
+      this.movablePuyoPosition(position, this._angle),
       eventEmit
     )
   }
@@ -32,7 +33,7 @@ export class FallingPuyoPuyo {
   private movablePuyoPosition(centerPos: Position, angle: PuyoAngle) {
     return {
       x: centerPos.x + Math.cos(angle.radian),
-      y: centerPos.y + Math.sin(angle.radian)
+      y: centerPos.y - Math.sin(angle.radian)
     }
   }
 
