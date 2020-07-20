@@ -11,7 +11,7 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue'
 import { AppSettings } from '~/settings/settings'
-import { Puyo } from '~/models/Puyo'
+import { Puyo } from '~/models/Puyo/index'
 
 interface DataType {
   imgWidth: number

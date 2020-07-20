@@ -21,7 +21,7 @@
 import Vue from 'vue'
 import { AppSettings } from '~/settings/settings'
 import { STAGE } from '@/models/Stage'
-import { FallingPuyo, PuyoColor } from '../models/Puyo'
+import { FallingPuyo, PuyoColor } from '~/models/Puyo/index'
 import { Puyobserver } from '../models/PuyoEvent'
 export default Vue.extend({
   data(): any {
