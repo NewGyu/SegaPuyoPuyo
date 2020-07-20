@@ -12,6 +12,7 @@ export class FallingPuyoPuyo {
 
   public get centerPuyo() { return this._centerPuyo }
   public get movablePuyo() { return this._movablePuyo }
+  public get angle() { return this._angle }
 
   constructor(
     public position: Position,
@@ -32,15 +33,21 @@ export class FallingPuyoPuyo {
 
   private movablePuyoPosition(centerPos: Position, angle: PuyoAngle) {
     return {
-      x: centerPos.x + Math.cos(angle.radian),
-      y: centerPos.y - Math.sin(angle.radian)
+      x: centerPos.x + Math.round(Math.cos(angle.radian)),
+      y: centerPos.y - Math.round(Math.sin(angle.radian))
     }
   }
 
 
   //回転する
-  rotate() {
+  rotateClockwise() {
+    this._angle = this._angle.add(-90);
+    this.movablePuyo.position = this.movablePuyoPosition(this.centerPuyo.position, this._angle);
+  }
 
+  rotateCounterClock() {
+    this._angle = this._angle.add(90);
+    this.movablePuyo.position = this.movablePuyoPosition(this.centerPuyo.position, this._angle);
   }
 
   private determineColor(): PuyoColor {
@@ -66,8 +73,8 @@ export class FallingPuyo extends Puyo {
 export class PuyoAngle {
   private _degree: number;
 
-  constructor(val: number) {
-    this._degree = this.normarize(val)
+  constructor(degree: number) {
+    this._degree = this.normarize(degree)
   };
 
   public get degree() {

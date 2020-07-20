@@ -36,7 +36,35 @@ describe("FallingPuyoPuyo", () => {
       expect(newPuyoPuyo.centerPuyo.position).toStrictEqual({ x: 2, y: 0 });
       expect(newPuyoPuyo.movablePuyo.position).toStrictEqual({ x: 2, y: -1 });
     });
-  })
+
+    it("angle is 90 degree", () => {
+      expect(newPuyoPuyo.angle.degree).toBe(90);
+    });
+  });
+  describe("when rotated", () => {
+    let newPuyoPuyo: FallingPuyoPuyo;
+
+    beforeEach(() => {
+      const emitter = new Puyobserver();
+      newPuyoPuyo = new FallingPuyoPuyo(
+        { x: 2, y: 0 },
+        emitter.emit.bind(emitter)
+      );
+    });
+
+    it("Clockwise, MovablePuyo is placed on the right", () => {
+      newPuyoPuyo.rotateClockwise();
+      expect(newPuyoPuyo.angle.degree).toBe(0);
+      expect(newPuyoPuyo.centerPuyo.position).toStrictEqual({ x: 2, y: 0 });
+      expect(newPuyoPuyo.movablePuyo.position).toStrictEqual({ x: 3, y: 0 });
+    });
+    it("CounterClock, MovablePuyo is placed on the left", () => {
+      newPuyoPuyo.rotateCounterClock();
+      expect(newPuyoPuyo.angle.degree).toBe(180);
+      expect(newPuyoPuyo.centerPuyo.position).toStrictEqual({ x: 2, y: 0 });
+      expect(newPuyoPuyo.movablePuyo.position).toStrictEqual({ x: 1, y: 0 });
+    });
+  });
 });
 
 describe("angle", () => {
