@@ -1,39 +1,52 @@
 <template>
-  <img clas="puyo" :src="puyoImage" :width="imgWidth" :height="imgHeight">
+  <img class="puyo" :src="puyoImage" :width="imgWidth" :height="imgHeight" :style="styleObject" />
 </template>
 
 <style scoped>
-  .puyo {
-    position: absolute;
-  }
+.puyo {
+  position: absolute;
+}
 </style>
 
 <script lang="ts">
-import Vue from 'vue'
-import {AppSettings} from '~/settings/settings';
+import Vue, { PropType } from 'vue'
+import { AppSettings } from '~/settings/settings'
+import { Puyo } from '~/models/Puyo'
 
-export type PuyoSizeType = {
-  height: number
-  width: number
+interface DataType {
+  imgWidth: number
+  imgHeight: number
+}
+
+interface PropsType {
+  puyo: Puyo
 }
 
 export default Vue.extend({
-  data(): any {
+  data(): DataType {
     return {
       imgWidth: AppSettings.puyoImgWidth,
-      imgHeight: AppSettings.puyoImgHeight
+      imgHeight: AppSettings.puyoImgHeight,
     }
   },
   props: {
-    puyoType: {
-      type: Number,
-      default: 1
-    }
+    puyo: {
+      type: Object as PropType<Puyo>,
+      required: true,
+    },
   },
   computed: {
     puyoImage(): String {
-      return `/img/puyo_${this.puyoType}.png`;
+      const puyo = this.puyo as Puyo
+      return `/img/puyo_${puyo.color}.png`
     },
-  }
+    styleObject() {
+      const puyo = this.puyo as Puyo
+      return {
+        top: puyo.position.y * (this as any).imgHeight + 'px',
+        left: puyo.position.x * (this as any).imgWidth + 'px',
+      }
+    },
+  },
 })
 </script>

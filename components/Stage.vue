@@ -2,7 +2,7 @@
   <div class="stage" :style="styleObject">
     <Zenkeshi />
     <Batankyu />
-    <Puyo puyo-type="3" />
+    <Puyo :puyo="puyo" />
   </div>
 </template>
 
@@ -20,6 +20,9 @@
 <script lang="ts">
 import Vue from 'vue'
 import { AppSettings } from '~/settings/settings'
+import { STAGE } from '@/models/Stage'
+import { FallingPuyo, PuyoColor } from '../models/Puyo'
+import { Puyobserver } from '../models/PuyoEvent'
 export default Vue.extend({
   data(): any {
     return {
@@ -27,7 +30,15 @@ export default Vue.extend({
         width: AppSettings.puyoImgWidth * AppSettings.stageCols + 'px',
         height: AppSettings.puyoImgHeight * AppSettings.stageRows + 'px',
       },
+      puyo: new FallingPuyo(
+        PuyoColor.Red,
+        { x: 2, y: 0 },
+        new Puyobserver().emit
+      ),
     }
+  },
+  mounted() {
+    STAGE.putNewPuyo()
   },
 })
 </script>
