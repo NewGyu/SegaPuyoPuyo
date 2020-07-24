@@ -26,34 +26,47 @@ export class GameBoard {
 
 
   cell(pos: Position) {
-    if (!this.isInRange(pos))
+    if (!this.isInGameArea(pos))
       return EmptyCell.INSTANCE;
-    return this._board[pos.y][pos.y];
+    return this._board[pos.y][pos.x];
   }
 
   isEmptyCell(pos: Position) {
     return (this.cell(pos) == EmptyCell.INSTANCE)
   }
 
-  isInRange(pos: Position) {
+  //指定されたposはゲームエリア内であればtrue
+  isInGameArea(pos: Position) {
     return pos.y >= 0
-      && pos.y <= this.rows
+      && pos.y < this.rows
       && pos.x >= 0
-      && pos.x <= this.cols;
+      && pos.x < this.cols;
   }
 
+  //ぷよをボードに配置
   putPuyo(puyo: Puyo) {
-    if (!this.isInRange(puyo.position))
+    if (!this.isInGameArea(puyo.position))
       return;
     console.log(puyo);
     this._board[puyo.position.y][puyo.position.x] = puyo;
   }
 
+  //空セルを配置
   putEmpty(pos: Position) {
     this._board[pos.y][pos.x] = EmptyCell.INSTANCE;
   }
 
   testdump() {
-    this._board.forEach(row => console.log(row));
+    const dumpCell = (cell: Cell) => {
+      if (cell === EmptyCell.INSTANCE)
+        return "_";
+      return "p";
+    }
+    const header = " :" + [...Array(this.cols).keys()].join(" ");
+    const body = this._board.map((row, i) => {
+      return `${i}:` + row.map(dumpCell).join(" ");
+    });
+
+    console.log([header, ...body]);
   }
 }
