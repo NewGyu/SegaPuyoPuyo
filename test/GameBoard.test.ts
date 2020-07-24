@@ -12,6 +12,14 @@ describe("GameBoard", () => {
     expect(board.isInGameArea({ x: 0, y: -1 })).toBeFalsy();
   })
 
+  it("initial puyoList is empty", () => {
+    //given
+    const board = new GameBoard(6, 7);
+
+    //then
+    expect(board.puyoList).toStrictEqual([])
+  })
+
   it("can put puyo", () => {
     //given
     const board = new GameBoard(6, 7);
@@ -30,5 +38,8 @@ describe("GameBoard", () => {
     expect(board.cell({ x: 1, y: 1 })).toStrictEqual(puyos[0]);
     expect(board.cell({ x: 1, y: 0 })).toStrictEqual(puyos[1]);
     expect(board.cell({ x: 5, y: 6 })).toStrictEqual(puyos[2]);
+
+    //左上から行ごとにリスト化される
+    expect(board.puyoList).toStrictEqual([puyos[1], puyos[0], puyos[2]]);
   })
 })

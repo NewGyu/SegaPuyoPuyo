@@ -24,6 +24,11 @@ export class GameBoard {
     this._board = b;
   }
 
+  get puyoList() {
+    return this._board.map(row => {
+      return row.filter(cell => cell !== EmptyCell.INSTANCE).map(cell => cell as Puyo)
+    }).flat();
+  }
 
   cell(pos: Position) {
     if (!this.isInGameArea(pos))
