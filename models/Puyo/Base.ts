@@ -1,12 +1,9 @@
-import { PuyoEvent } from "~/models/PuyoEvent";
-
 //ぷよ全般
 export abstract class Puyo {
 
   constructor(
     public color: PuyoColor,
     public position: Position,
-    protected eventEmit: PuyoEvent.EmitFunc
   ) {
   }
 

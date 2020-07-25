@@ -1,5 +1,4 @@
 import { Puyo, PuyoColor, Position } from "./Base";
-import { PuyoEvent } from "../PuyoEvent";
 
 //ぷよの色の種類数（Enum要素数を出す小技）
 const colors = Object.keys(PuyoColor).length / 2;
@@ -16,18 +15,15 @@ export class FallingPuyoPuyo {
 
   constructor(
     public position: Position,
-    private eventEmit: PuyoEvent.EmitFunc,
   ) {
     this._centerPuyo = new FallingPuyo(
       this.determineColor(),
       position,
-      eventEmit
     );
 
     this._movablePuyo = new FallingPuyo(
       this.determineColor(),
       this.movablePuyoPosition(position, this._angle),
-      eventEmit
     )
   }
 
@@ -58,12 +54,6 @@ export class FallingPuyoPuyo {
 //落ちぷよ
 export class FallingPuyo extends Puyo {
   moveHorizontal(destX: number) {
-    console.log(this.eventEmit)
-    this.eventEmit("moved", {
-      startX: this.position.x,
-      destX
-    });
-
     this.position.x = destX;
   }
 }

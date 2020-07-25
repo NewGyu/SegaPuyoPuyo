@@ -1,19 +1,14 @@
-import { PuyoColor, FallingPuyo, PuyoAngle, FallingPuyoPuyo } from "../models/Puyo"
-import { Puyobserver } from "../models/PuyoEvent"
+import { PuyoColor, FallingPuyo, PuyoAngle, FallingPuyoPuyo } from "../models/Puyo/index"
 import { sleep } from "./testutil";
 
 
 describe("FallingPuyo", () => {
-  const emitter = new Puyobserver();
-
   it("moved event is fired when being moved", async () => {
     //given
     const spy = jest.fn();
-    emitter.on("moved", ev => { spy(ev); });
     const p = new FallingPuyo(
       PuyoColor.Blue,
       { x: 1, y: 1 },
-      emitter.emit.bind(emitter)
     );
     //when
     p.moveHorizontal(3);
@@ -21,16 +16,13 @@ describe("FallingPuyo", () => {
 
     //then
     expect(p.position).toStrictEqual({ x: 3, y: 1 });
-    expect(spy).toBeCalledWith({ startX: 1, destX: 3 });
   });
 });
 
 describe("FallingPuyoPuyo", () => {
   describe("when created new", () => {
-    const emitter = new Puyobserver();
     const newPuyoPuyo = new FallingPuyoPuyo(
       { x: 2, y: 0 },
-      emitter.emit.bind(emitter)
     );
     it("movable puyo is placed 'up'", () => {
       expect(newPuyoPuyo.centerPuyo.position).toStrictEqual({ x: 2, y: 0 });
@@ -45,10 +37,8 @@ describe("FallingPuyoPuyo", () => {
     let newPuyoPuyo: FallingPuyoPuyo;
 
     beforeEach(() => {
-      const emitter = new Puyobserver();
       newPuyoPuyo = new FallingPuyoPuyo(
         { x: 2, y: 0 },
-        emitter.emit.bind(emitter)
       );
     });
 
