@@ -1,4 +1,4 @@
-import { PuyoColor, FallingPuyo, PuyoAngle, FallingPuyoPuyo } from "../models/Puyo/index"
+import { PuyoColor, FallingPuyo, PuyoAngle, FallingPuyoPuyo } from "~/models/Puyo/index"
 import { sleep } from "./testutil";
 
 

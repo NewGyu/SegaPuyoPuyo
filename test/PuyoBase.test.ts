@@ -1,4 +1,4 @@
-import { PuyoColor } from "../models/Puyo"
+import { PuyoColor } from "~/models/Puyo"
 
 describe("Puyo.Base", () => {
   describe("PuyoColor", () => {

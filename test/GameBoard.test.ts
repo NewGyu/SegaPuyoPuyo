@@ -1,5 +1,4 @@
-import { GameBoard } from "../models/GameBoard"
-import { FallingPuyo, PuyoColor, FixedPuyo, Puyo } from "../models/Puyo";
+import { FallingPuyo, PuyoColor, FixedPuyo, Puyo } from "~/models/Puyo";
 
 describe("GameBoard", () => {
   it("can check out of area", () => {

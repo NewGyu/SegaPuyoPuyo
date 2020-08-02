@@ -1,4 +1,4 @@
-import { GameStateMachine } from "../models/GameStateMachine";
+import { GameStateMachine } from "~/models/GameStateMachine";
 import { sleep } from "./testutil";
 
 describe("GameStateMachine", () => {

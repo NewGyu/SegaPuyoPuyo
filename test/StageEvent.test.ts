@@ -1,6 +1,6 @@
-import { StageEventObserver } from "../models/StageEventObserver"
+import { StageEventObserver } from "~/models/StageEventObserver"
 import { sleep } from "./testutil";
-import { FallingPuyoPuyo } from "../models/Puyo";
+import { FallingPuyoPuyo } from "~/models/Puyo";
 
 describe("StageEvent", () => {
   const observer = new StageEventObserver();

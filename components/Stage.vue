@@ -2,7 +2,12 @@
   <div class="stage" :style="styleObject">
     <Zenkeshi />
     <Batankyu />
-    <Puyo :puyo="puyo" />
+    <FallingPuyoPuyo v-if="falling" :puyopuyo="falling" />
+
+    <!--
+    <Puyo v-for="(p, idx) in puyoList" :key="idx" :puyo="p" />
+    -->
+    <p>{{ message }}</p>
   </div>
 </template>
 
@@ -20,9 +25,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import { AppSettings } from '~/settings/settings'
-import { STAGE } from '@/models/Stage'
-import { FallingPuyo, PuyoColor } from '~/models/Puyo/index'
-import { Puyobserver } from '../models/PuyoEvent'
+import { Game } from '~/observable/Game'
+
 export default Vue.extend({
   data(): any {
     return {
@@ -30,15 +34,15 @@ export default Vue.extend({
         width: AppSettings.puyoImgWidth * AppSettings.stageCols + 'px',
         height: AppSettings.puyoImgHeight * AppSettings.stageRows + 'px',
       },
-      puyo: new FallingPuyo(
-        PuyoColor.Red,
-        { x: 2, y: 0 },
-        new Puyobserver().emit
-      ),
     }
   },
   mounted() {
-    STAGE.putNewPuyo()
+    Game.start()
+  },
+  computed: {
+    message: () => (Game.available ? 'スターティン' : 'まだ'),
+    puyoList: () => Game.puyoList,
+    falling: () => Game.fallingPuyoPuyo,
   },
 })
 </script>
