@@ -1,4 +1,4 @@
-import { StageEventObserver } from "~/models/StageEventObserver"
+import { StageEventObserver } from "~/models/StageEvent"
 import { sleep } from "./testutil";
 import { FallingPuyoPuyo } from "~/models/Puyo";
 
@@ -21,11 +21,11 @@ describe("StageEvent", () => {
   it("can fire newpuyo event", async () => {
     //given
     const spy = jest.fn();
-    observer.on("newPuyo", np => spy(np));
+    observer.on("new puyo is put", np => spy(np));
 
     //when
     const newPuyoPuyo = new FallingPuyoPuyo({ x: 0, y: 0 });
-    observer.emit("newPuyo", { newPuyoPuyo });
+    observer.emit("new puyo is put", { newPuyoPuyo });
     await sleep(1);
 
     //then
