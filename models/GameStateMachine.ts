@@ -1,7 +1,7 @@
 import Emittery from 'emittery'
 
 
-type GameState = "start" | "falling" | "erasing"
+export type GameState = "start" | "falling" | "erasing"
   | "newPuyo" | "puyopuyo" | "gameover";
 
 interface Transition {
@@ -13,7 +13,10 @@ const TransitionMap: Transition[] = [
   { from: "start", to: "newPuyo" },
   { from: "newPuyo", to: "puyopuyo" },
   { from: "newPuyo", to: "gameover" },
-  { from: "falling", to: "erasing" }
+  { from: "puyopuyo", to: "falling" },
+  { from: "falling", to: "erasing" },
+  { from: "erasing", to: "falling" },
+  { from: "erasing", to: "newPuyo" }
 ]
 
 export class GameStateMachine {
@@ -27,6 +30,7 @@ export class GameStateMachine {
     if (!TransitionMap.find(e => e.from === this.current && e.to === nextState))
       throw new Error(`InvalidTransition: ${this.current}=>${nextState} `);
 
+    console.log(`${this.current} => ${nextState}`)
     this.current = nextState;
     this.emitter.emit(nextState);
   }
