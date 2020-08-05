@@ -1,5 +1,4 @@
-import { Puyo, Position } from "./Puyo"
-import { Puyobserver, PuyoEvent } from "./PuyoEvent"
+import { Puyo, CellPosition } from "./Puyo"
 
 //ぷよがないからのマス
 class EmptyCell {
@@ -30,18 +29,18 @@ export class GameBoard {
     }).flat();
   }
 
-  cell(pos: Position) {
+  cell(pos: CellPosition) {
     if (!this.isInGameArea(pos))
       return EmptyCell.INSTANCE;
     return this._board[pos.y][pos.x];
   }
 
-  isEmptyCell(pos: Position) {
+  isEmptyCell(pos: CellPosition) {
     return (this.cell(pos) == EmptyCell.INSTANCE)
   }
 
   //指定されたposはゲームエリア内であればtrue
-  isInGameArea(pos: Position) {
+  isInGameArea(pos: CellPosition) {
     return pos.y >= 0
       && pos.y < this.rows
       && pos.x >= 0
@@ -50,14 +49,14 @@ export class GameBoard {
 
   //ぷよをボードに配置
   putPuyo(puyo: Puyo) {
-    if (!this.isInGameArea(puyo.position))
+    if (!this.isInGameArea(puyo.cellPos))
       return;
     console.log(puyo);
-    this._board[puyo.position.y][puyo.position.x] = puyo;
+    this._board[puyo.cellPos.y][puyo.cellPos.x] = puyo;
   }
 
   //空セルを配置
-  putEmpty(pos: Position) {
+  putEmpty(pos: CellPosition) {
     this._board[pos.y][pos.x] = EmptyCell.INSTANCE;
   }
 

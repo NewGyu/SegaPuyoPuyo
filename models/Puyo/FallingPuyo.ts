@@ -1,4 +1,4 @@
-import { Puyo, PuyoColor, Position } from "./Base";
+import { Puyo, PuyoColor, CellPosition } from "./Base";
 
 //ぷよの色の種類数（Enum要素数を出す小技）
 const colors = Object.keys(PuyoColor).length / 2;
@@ -14,7 +14,7 @@ export class FallingPuyoPuyo {
   public get angle() { return this._angle }
 
   constructor(
-    public position: Position,
+    public position: CellPosition,
   ) {
     this._centerPuyo = new FallingPuyo(
       this.determineColor(),
@@ -27,23 +27,18 @@ export class FallingPuyoPuyo {
     )
   }
 
-  private movablePuyoPosition(centerPos: Position, angle: PuyoAngle) {
+  private movablePuyoPosition(centerPos: CellPosition, angle: PuyoAngle) {
     return {
       x: centerPos.x + Math.round(Math.cos(angle.radian)),
       y: centerPos.y - Math.round(Math.sin(angle.radian))
     }
   }
 
-
-  //回転する
-  rotateClockwise() {
-    this._angle = this._angle.add(-90);
-    this.movablePuyo.position = this.movablePuyoPosition(this.centerPuyo.position, this._angle);
-  }
-
-  rotateCounterClock() {
-    this._angle = this._angle.add(90);
-    this.movablePuyo.position = this.movablePuyoPosition(this.centerPuyo.position, this._angle);
+  //右か左かどちらかに90度回転
+  rotate(direction: RotateDirection) {
+    this._angle = this._angle.add(direction);
+    const rotatedPos = this.movablePuyoPosition(this.centerPuyo.cellPos, this._angle);
+    this._movablePuyo = this._movablePuyo.moveTo(rotatedPos);
   }
 
   private determineColor(): PuyoColor {
@@ -51,10 +46,27 @@ export class FallingPuyoPuyo {
   }
 }
 
+export enum RotateDirection {
+  Clockwise = -90,
+  ConterClock = 90
+}
+
 //落ちぷよ
 export class FallingPuyo extends Puyo {
-  moveHorizontal(destX: number) {
-    this.position.x = destX;
+  moveTo(pos: CellPosition): FallingPuyo;
+  moveTo(top: number, left: number): FallingPuyo;
+  moveTo(arg1: any, arg2?: any): FallingPuyo {
+    if ((arg1 as CellPosition).x) {
+      return new FallingPuyo(this.color, arg1 as CellPosition);
+    }
+    return new FallingPuyo(this.color, arg1 as number, arg2 as number);
+  }
+  moveHorizontalPx(px: number) {
+    return this.moveTo(this.top, this.left + px);
+  }
+
+  moveVerticalPx(px: number) {
+    return this.moveTo(this.top + px, this.left);
   }
 }
 

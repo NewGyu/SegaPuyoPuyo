@@ -1,22 +1,34 @@
-import { PuyoColor, FallingPuyo, PuyoAngle, FallingPuyoPuyo } from "~/models/Puyo/index"
-import { sleep } from "./testutil";
-
+import { PuyoColor, FallingPuyo, PuyoAngle, FallingPuyoPuyo, RotateDirection } from "~/models/Puyo"
 
 describe("FallingPuyo", () => {
-  it("moved event is fired when being moved", async () => {
-    //given
-    const spy = jest.fn();
-    const p = new FallingPuyo(
+  let org: FallingPuyo;
+  beforeEach(() => {
+    org = new FallingPuyo(
       PuyoColor.Blue,
-      { x: 1, y: 1 },
+      100,
+      120
     );
+  })
+
+  it("only left is changed when moveHorizontal", () => {
+    //given
     //when
-    p.moveHorizontal(3);
-    await sleep(1); //sleep is necessary to fire the event
+    const moved = org.moveHorizontalPx(10);
 
     //then
-    expect(p.position).toStrictEqual({ x: 3, y: 1 });
+    expect({ top: moved.top, left: moved.left }).toStrictEqual({ top: org.top, left: org.left + 10 })
   });
+
+  it("only top is changed when moveVertical", () => {
+    //when
+    const moved = org.moveVerticalPx(20);
+
+    //then
+    expect({ top: moved.top, left: moved.left }).toStrictEqual({ top: org.top + 20, left: org.left })
+  });
+
+
+
 });
 
 describe("FallingPuyoPuyo", () => {
@@ -25,8 +37,8 @@ describe("FallingPuyoPuyo", () => {
       { x: 2, y: 0 },
     );
     it("movable puyo is placed 'up'", () => {
-      expect(newPuyoPuyo.centerPuyo.position).toStrictEqual({ x: 2, y: 0 });
-      expect(newPuyoPuyo.movablePuyo.position).toStrictEqual({ x: 2, y: -1 });
+      expect(newPuyoPuyo.centerPuyo.cellPos).toStrictEqual({ x: 2, y: 0 });
+      expect(newPuyoPuyo.movablePuyo.cellPos).toStrictEqual({ x: 2, y: -1 });
     });
 
     it("angle is 90 degree", () => {
@@ -43,16 +55,16 @@ describe("FallingPuyoPuyo", () => {
     });
 
     it("Clockwise, MovablePuyo is placed on the right", () => {
-      newPuyoPuyo.rotateClockwise();
+      newPuyoPuyo.rotate(RotateDirection.Clockwise);
       expect(newPuyoPuyo.angle.degree).toBe(0);
-      expect(newPuyoPuyo.centerPuyo.position).toStrictEqual({ x: 2, y: 0 });
-      expect(newPuyoPuyo.movablePuyo.position).toStrictEqual({ x: 3, y: 0 });
+      expect(newPuyoPuyo.centerPuyo.cellPos).toStrictEqual({ x: 2, y: 0 });
+      expect(newPuyoPuyo.movablePuyo.cellPos).toStrictEqual({ x: 3, y: 0 });
     });
     it("CounterClock, MovablePuyo is placed on the left", () => {
-      newPuyoPuyo.rotateCounterClock();
+      newPuyoPuyo.rotate(RotateDirection.ConterClock);
       expect(newPuyoPuyo.angle.degree).toBe(180);
-      expect(newPuyoPuyo.centerPuyo.position).toStrictEqual({ x: 2, y: 0 });
-      expect(newPuyoPuyo.movablePuyo.position).toStrictEqual({ x: 1, y: 0 });
+      expect(newPuyoPuyo.centerPuyo.cellPos).toStrictEqual({ x: 2, y: 0 });
+      expect(newPuyoPuyo.movablePuyo.cellPos).toStrictEqual({ x: 1, y: 0 });
     });
   });
 });
