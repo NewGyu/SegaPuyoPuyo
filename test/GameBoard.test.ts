@@ -1,3 +1,4 @@
+import { GameBoard } from "~/models/GameBoard"
 import { FallingPuyo, PuyoColor, FixedPuyo, Puyo } from "~/models/Puyo";
 
 describe("GameBoard", () => {
@@ -22,12 +23,11 @@ describe("GameBoard", () => {
   it("can put puyo", () => {
     //given
     const board = new GameBoard(6, 7);
-    const mockEmitFunc = jest.fn();
 
     const puyos: Puyo[] = [
-      new FallingPuyo(PuyoColor.Blue, { x: 1, y: 1 }, mockEmitFunc),
-      new FallingPuyo(PuyoColor.Red, { x: 1, y: 0 }, mockEmitFunc),
-      new FixedPuyo(PuyoColor.Purple, { x: 5, y: 6 }, mockEmitFunc)
+      new FallingPuyo(PuyoColor.Blue, { x: 1, y: 1 }),
+      new FallingPuyo(PuyoColor.Red, { x: 1, y: 0 }),
+      new FixedPuyo(PuyoColor.Purple, { x: 5, y: 6 })
     ]
     //when
     puyos.forEach(p => board.putPuyo(p));
