@@ -1,6 +1,6 @@
 import { AppSettings } from "~/settings/settings";
 
-const CellSize = {
+export const CellSize = {
   width: AppSettings.puyoImgWidth,
   height: AppSettings.puyoImgHeight
 } as const

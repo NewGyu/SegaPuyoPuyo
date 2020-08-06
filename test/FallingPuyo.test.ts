@@ -17,6 +17,7 @@ describe("FallingPuyo", () => {
 
     //then
     expect({ top: moved.top, left: moved.left }).toStrictEqual({ top: org.top, left: org.left + 10 })
+    expect(moved.color).toBe(org.color);
   });
 
   it("only top is changed when moveVertical", () => {
@@ -25,10 +26,8 @@ describe("FallingPuyo", () => {
 
     //then
     expect({ top: moved.top, left: moved.left }).toStrictEqual({ top: org.top + 20, left: org.left })
+    expect(moved.color).toBe(org.color);
   });
-
-
-
 });
 
 describe("FallingPuyoPuyo", () => {
@@ -46,25 +45,27 @@ describe("FallingPuyoPuyo", () => {
     });
   });
   describe("when rotated", () => {
-    let newPuyoPuyo: FallingPuyoPuyo;
+    let org: FallingPuyoPuyo;
 
     beforeEach(() => {
-      newPuyoPuyo = new FallingPuyoPuyo(
+      org = new FallingPuyoPuyo(
         { x: 2, y: 0 },
       );
     });
 
     it("Clockwise, MovablePuyo is placed on the right", () => {
-      newPuyoPuyo.rotate(RotateDirection.Clockwise);
-      expect(newPuyoPuyo.angle.degree).toBe(0);
-      expect(newPuyoPuyo.centerPuyo.cellPos).toStrictEqual({ x: 2, y: 0 });
-      expect(newPuyoPuyo.movablePuyo.cellPos).toStrictEqual({ x: 3, y: 0 });
+      const newOne = org.rotate(RotateDirection.Clockwise);
+      expect(newOne.angle.degree).toBe(0);
+      expect(newOne.centerPuyo.cellPos).toStrictEqual(org.centerPuyo.cellPos);
+      expect(newOne.movablePuyo.cellPos).not.toStrictEqual(org.movablePuyo.cellPos);
+      expect(newOne.movablePuyo.cellPos).toStrictEqual({ x: 3, y: 0 });
     });
     it("CounterClock, MovablePuyo is placed on the left", () => {
-      newPuyoPuyo.rotate(RotateDirection.ConterClock);
-      expect(newPuyoPuyo.angle.degree).toBe(180);
-      expect(newPuyoPuyo.centerPuyo.cellPos).toStrictEqual({ x: 2, y: 0 });
-      expect(newPuyoPuyo.movablePuyo.cellPos).toStrictEqual({ x: 1, y: 0 });
+      const newOne = org.rotate(RotateDirection.ConterClock);
+      expect(newOne.angle.degree).toBe(180);
+      expect(newOne.centerPuyo.cellPos).toStrictEqual(org.centerPuyo.cellPos);
+      expect(newOne.movablePuyo.cellPos).not.toStrictEqual(org.movablePuyo.cellPos);
+      expect(newOne.movablePuyo.cellPos).toStrictEqual({ x: 1, y: 0 });
     });
   });
 });
