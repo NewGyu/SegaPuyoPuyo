@@ -39,7 +39,10 @@ export class FallingPuyoPuyo {
     return Math.floor(Math.random() * colors) + 1;
   }
 
-  //右か左かどちらかに90度回転
+  /**
+   * 右か左かどちらかに90度回転
+   * @param direction
+   */
   rotate(direction: RotateDirection) {
     const newAngle = this.angle.add(direction);
     const newMovable = this.movablePuyoPosition(this.centerPuyo, newAngle);
@@ -47,6 +50,18 @@ export class FallingPuyoPuyo {
       this.centerPuyo,
       this.movablePuyo.moveTo(newMovable.top, newMovable.left),
       newAngle
+    );
+  }
+
+  /**
+   * 左右移動
+   * @param amountCell 移動するマス数
+   */
+  moveHorizontal(amountCell: number) {
+    return new FallingPuyoPuyo(
+      this.centerPuyo.moveHorizontalCell(amountCell),
+      this.movablePuyo.moveHorizontalCell(amountCell),
+      this.angle
     );
   }
 }
@@ -67,8 +82,9 @@ export class FallingPuyo extends Puyo {
     }
     return new FallingPuyo(this.color, arg1 as number, arg2 as number);
   }
-  moveHorizontalPx(px: number) {
-    return this.moveTo(this.top, this.left + px);
+
+  moveHorizontalCell(amountCell: number) {
+    return this.moveTo(this.top, this.left + amountCell * CellSize.width);
   }
 
   moveVerticalPx(px: number) {
