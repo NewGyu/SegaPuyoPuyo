@@ -14,12 +14,11 @@ type EventDataMap = {
   "new puyo is put": StageEvent.NewPuyo,
   "falled": StageEvent.Falled,
   "erased": void,
-  "endControl": void,
   "gameover": void
 }
 
 
-type NoneArgEvent = "started" | "doing puyopuyo";
+type NoneArgEvent = "started" | "doing puyopuyo" | "end control";
 
 //EventObserver & Emitter
 export class StageEventObserver extends Emittery.Typed<EventDataMap, NoneArgEvent> { }

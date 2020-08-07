@@ -43,8 +43,8 @@ export default Vue.extend({
     styleObject() {
       const puyo = this.puyo as Puyo
       return {
-        top: puyo.position.y * (this as any).imgHeight + 'px',
-        left: puyo.position.x * (this as any).imgWidth + 'px',
+        top: puyo.top + 'px',
+        left: puyo.left + 'px',
       }
     },
   },

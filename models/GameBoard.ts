@@ -14,7 +14,7 @@ type Cell = Puyo | EmptyCell;
 export class GameBoard {
   private readonly _board: Cell[][];
 
-  constructor(private cols: number, private rows: number) {
+  constructor(public readonly cols: number, public readonly rows: number) {
     //Initialize game board
     let b = new Array<Array<Cell>>(rows);
     for (let i = 0; i < b.length; i++) {
