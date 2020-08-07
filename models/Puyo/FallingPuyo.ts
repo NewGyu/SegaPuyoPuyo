@@ -64,6 +64,18 @@ export class FallingPuyoPuyo {
       this.angle
     );
   }
+
+  /**
+   * 自由落下
+   * @param amountPx 落ちるピクセル量
+   */
+  fallingDown(amountPx: number) {
+    return new FallingPuyoPuyo(
+      this.centerPuyo.moveVerticalPx(amountPx),
+      this.movablePuyo.moveVerticalPx(amountPx),
+      this.angle
+    );
+  }
 }
 
 //回転方向

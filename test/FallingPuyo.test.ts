@@ -77,6 +77,16 @@ describe("FallingPuyoPuyo", () => {
         expect(newOne.movablePuyo.cellPos).toStrictEqual({ x: 3, y: -1 });
       });
     });
+
+    describe("falling down", () => {
+      it("free fall", () => {
+        const newOne = org.fallingDown(33);
+        expect(newOne.centerPuyo.left).toStrictEqual(org.centerPuyo.left);
+        expect(newOne.centerPuyo.top).toStrictEqual(org.centerPuyo.top + 33);
+        expect(newOne.movablePuyo.left).toStrictEqual(org.movablePuyo.left);
+        expect(newOne.movablePuyo.top).toStrictEqual(org.movablePuyo.top + 33);
+      });
+    });
   });
 
   describe("angle", () => {
